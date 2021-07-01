@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+ 
+
+                
+{% block contenido %}
+
+<!-- Informacion de la App -->
+<div class="row">
+    <div class="col s4">
+     <center><img class="imagenContenedor" src="{{ asset('img/logo.png') }}"></center>
+    </div>
+    <div class="col s8">
+     <center><h5>¿Que es RapiDoc?</h5></center>
+        <blockquote class="textoBlockquote">
+         <p>RapiDoc es una App que pretende ser una herramienta de apoyo para la informatización de procesos manuales permitiéndole al usuario crear documentos digitales utilizando una base de conocimiento generada a través de la aplicación, desde la cual el usuario puede gestionar toda su biblioteca de documentos, además contar con métricas como apoyo estadístico de toda documentación generada dentro de la App, mejorando la eficiencia de trabajo y optimizando los tiempos de una jornada laboral.
+        </p>
+        </blockquote>            
+     <center><h5>¿Que beneficios obtengo con la Aplicacion?</h5></center>
+        <blockquote class="textoBlockquote">
+         <p>Informatizar tareas manuales de forma ágil y flexible.</p>
+         <p>Monitorear toda la documentación generada desde la aplicación.</p>
+         <p>Generar una base de conocimiento a través de la carga de información personal.</p>
+         <p>Establecer métricas estadísticas y de control sobre la documentación generada en la app.</p>
+        </blockquote>
+    </div>
+</div>
+<!-- Informacion de la App -->
+
+
+{% endblock contenido %}            
+

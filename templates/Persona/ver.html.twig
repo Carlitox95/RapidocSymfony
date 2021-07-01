@@ -1,0 +1,45 @@
+{% extends 'base.html.twig' %}
+ 
+
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+   
+    <!-- Caja de Registros Personales -->
+    <div class="offset-s2 col s8 offset-s2">
+
+        <ul class="collection with-header" id="listadoPersonas">
+         <li class="collection-header blue lighten-2 white-text"><h6>Datos Personales de {{persona}}</h6></li>
+         <li class="collection-item"><strong><i class="material-icons left">person</i> Nombre Completo: </strong> {{ persona.apellido }},{{ persona.nombre }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">portrait</i> DNI: </strong> {{ persona.dni }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">portrait</i> Nro Trámite: </strong> {{ persona.dniNroTramite }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">person</i> Cuit/Cuil: </strong> {{ persona.cuitcuil }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">contact_mail</i> Mail: </strong> {{ persona.mail }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">contact_phone</i> Telefono: </strong> {{ persona.telefono }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">home</i> Direccion: </strong> {{ persona.telefono }}</li>
+        </ul>
+       
+    </div> 
+    <!-- Caja de Registros Personales -->   
+
+
+    
+    <br>
+    <br>
+    <!-- Botones de Direccionamiento -->
+    <div class="offset-s2 col s8 offset-s2">
+    <center>
+        <a href="{{ path('registros') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">arrow_back</i>Volver
+        </a> 
+        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">home</i>Volver al Home
+        </a> 
+    </center>
+    </div>
+    <!-- Botones de Direccionamiento -->
+    
+</div>
+{% endblock contenido %}            
+

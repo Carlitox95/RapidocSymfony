@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+         {% block title %} RapiDoc {% endblock %}
+        </title>
+
+        <!-- Estilos Javascript -->
+        {% block stylesheets %}
+         <link rel="shortcut icon" href="{{ asset('img/icon.ico') }}" />
+         <link rel="stylesheet" href="{{ asset('css/icon.css') }}"> 
+         <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"> 
+         <link rel="stylesheet" href="{{ asset('css/estilos.css ') }}"> 
+        {% endblock %}
+        <!-- Estilos Javascript -->
+        
+    </head>
+    <body>
+        {% block body %} 
+        
+        {% block header %}
+            <!-- Header -->
+            <header> 
+                <!-- NAV -->
+                <nav>
+                    <div class="nav-wrapper blue lighten-2">
+                    
+                        {% if app.request.attributes.get('_route') == "index" %}
+                            <a id="logoUrl" href="{{ path('index') }}" class="brand-logo">
+                             <img class="logoHeader" src="{{ asset('img/logo.png') }}">
+                            </a> 
+                        {% else %}
+                            <a id="logoUrl" href="{{ path('home') }}" class="brand-logo">
+                             <img class="logoHeader" src="{{ asset('img/logo.png') }}">
+                            </a> 
+                        {% endif %}                        
+                        <a href="#" data-target="mobile-demo" class="sidenav-trigger"><i class="material-icons">menu</i></a> 
+                    
+                        <!-- Links del Nvar -->
+                        <ul id="nav" class="right hide-on-med-and-down">
+                         <li><a href="{{ path('home') }}"><i class="material-icons left">home</i> Home</a></li>
+                         <li><a href="{{ path('estadisticas') }}"><i class="material-icons left">equalizer</i> Estadisticas</a></li>
+                         <li><a href="{{ path('documentos') }}"><i class="material-icons left">edit</i> Documentos</a></li>
+                         <li><a href="{{ path('archivos') }}"><i class="material-icons left">folder</i> Archivos</a></li>
+                         <li><a href="{{ path('registros') }}"><i class="material-icons left">person</i> Registros</a></li>                        
+                        
+                            {% if app.user %}
+                                <li>
+                                 <a href="{{ path('user') }}"><i class="material-icons left">verified_user</i> {{ app.user.username }}</a>
+                                </li>
+                            {% endif %}
+                        
+
+                         <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i> Salir</a></li>
+                        </ul>
+                        <!-- Links del Nvar -->
+
+                    </div>
+                </nav>
+                <!-- NAV -->
+                <!-- NAV Mobile -->
+                <ul class="sidenav" id="mobile-demo">
+                 <li><a href="{{ path('home') }}"><i class="material-icons left">home</i> Home</a></li>
+                 <li><a href="{{ path('estadisticas') }}"><i class="material-icons left">equalizer</i> Estadisticas</a></li>
+                 <li><a href="{{ path('documentos') }}"><i class="material-icons left">edit</i> Documentos</a></li>
+                 <li><a href="{{ path('archivos') }}"><i class="material-icons left">folder</i> Archivos</a></li>
+                 <li><a href="{{ path('registros') }}"><i class="material-icons left">person</i> Registros</a></li>
+                 <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i> Salir</a></li>
+                </ul>
+                <!-- NAV Mobile -->
+            </header>
+        <!-- Header -->
+        {% endblock header %}
+
+
+       
+        <!-- Bloque que contendra las vista de la App -->
+        <main> 
+        <br>
+        <div class="row">
+        {% if message  is defined %} <div class="flash-notice"> {{ message }} </div>  {% endif %} 
+        {% block contenido %} 
+        {% endblock contenido %}
+        </div>
+        </main>
+        <!-- Bloque que contendra las vista de la App -->
+
+
+        <!-- Footer -->
+        {% block footer %} 
+        <footer class="page-footer blue lighten-2">            
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                     <h5 class="white-text">Rapidoc</h5>
+                     <p class="grey-text text-lighten-4">Creación y Gestión de documentos de forma rápida y sencilla en formato digital.</p>
+                    </div>            
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                 © 2021 RapiDoc 
+                 <a class="grey-text text-lighten-4 right" href="#!">Mas Informacion</a>
+                </div>
+            </div>
+        </footer>
+        {% endblock footer %} 
+        <!-- Footer-->
+
+        <!-- Funciones Javascript -->
+        {% block javascripts %}
+         <script src="{{ asset('js/materialize.min.js') }}"></script>
+         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>            
+        {% endblock %}
+        <!-- Funciones Javascript -->
+
+        {% endblock body %}
+    </body>
+</html>

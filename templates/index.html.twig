@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>
+         {% block title %} RapiDoc {% endblock %}
+        </title>
+
+        <!-- Estilos Javascript -->
+        {% block stylesheets %}
+         <link rel="shortcut icon" href="{{ asset('img/icon.ico') }}" />
+         <link rel="stylesheet" href="{{ asset('css/icon.css') }}"> 
+         <link rel="stylesheet" href="{{ asset('css/materialize.min.css') }}"> 
+         <link rel="stylesheet" href="{{ asset('css/estilos.css ') }}"> 
+        {% endblock %}
+        <!-- Estilos Javascript -->
+        
+        <!-- Funciones Javascript -->
+        {% block javascripts %}
+         <script src="{{ asset('js/materialize.min.js') }}"></script>
+         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>            
+        {% endblock %}
+        <!-- Funciones Javascript -->
+    </head>
+    <body>
+        {% block body %} 
+        
+        {% block header %}
+            <!-- Header -->
+            <header> 
+                <!-- NAV -->
+                <nav>
+                    <div class="nav-wrapper blue lighten-2">
+                        <a id="logoUrl" href="{{ path('index') }}" class="brand-logo">
+                         <img class="logoHeader" src="{{ asset('img/logo.png') }}">
+                        </a> 
+                      </div>
+                </nav>
+                <!-- NAV -->  
+            </header>
+        <!-- Header -->
+        {% endblock header %}
+
+
+       
+        <!-- Bloque que contendra las vista de la App -->
+        <!-- Contenido Principal -->
+        <main>
+        <div class="container">
+            <div class="row">
+             <center><h2 class="titulo">Bienvenido a RapiDoc!</h2></center>
+
+                <center><img class="imagenVista" src="{{ asset('img/logo.png') }}"></center> 
+                
+                <blockquote class="textoBlockquote">
+                 Rapidoc es una Aplicacion que te permitira encargarte de forma agil y rapida de la creación y gestión de los documentos y/o
+                 formularios que generalmente tendrias que hacer a mano durante una jornada laboral. Otorga la ventaja de generar
+                 documentos a partir de una base de conocimientos propia generada a traves del mismo uso de la aplicacion.
+                </blockquote>  
+                
+                <center>
+                    <a href="{{ path('app_login') }}" class="waves-effect waves-light btn-large blue lighten-2">Ingresar</a> 
+                </center>                
+            </div>
+          </div>       
+    </main>
+    <!-- Contenido Principal -->
+        <!-- Bloque que contendra las vista de la App -->
+
+
+        <!-- Footer -->
+        {% block footer %} 
+        <footer class="page-footer blue lighten-2">
+            
+            <div class="container">
+                <div class="row">
+                    <div class="col s12">
+                     <h5 class="white-text">Rapidoc</h5>
+                     <p class="grey-text text-lighten-4">Creación y Gestión de documentos de forma rápida y sencilla en formato digital.</p>
+                    </div>            
+                </div>
+            </div>
+            <div class="footer-copyright">
+                <div class="container">
+                 © 2021 RapiDoc 
+                 <a class="grey-text text-lighten-4 right" href="#!">Mas Informacion</a>
+                </div>
+            </div>
+        </footer>
+        {% endblock footer %} 
+        <!-- Footer-->
+
+        {% endblock body %}
+    </body>
+</html>
