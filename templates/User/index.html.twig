@@ -7,18 +7,29 @@
 
 
   <!-- Caja de Datos del Usuario -->
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="col s6">
+  {% else %}
   <div class="offset-s2 col s8 offset-s2">
+  {% endif %}
 
     <ul class="collection with-header" id="listadoPersonas">
       <li class="collection-header blue lighten-2 white-text"><h6>Perfil de Usuario {{usuario}}</h6></li>
       <li class="collection-item"><strong><i class="material-icons left">person</i>Usuario: </strong> {{ usuario.username }}</li>
       <li class="collection-item"><strong><i class="material-icons left">email</i>Mail: </strong> {{ usuario.mail }}</li>
-      <li class="collection-item"><strong><i class="material-icons left">person</i>Rango: </strong> {{ usuario.roles[0] }}</li>
+      <li class="collection-item">
+        {% if usuario.roles[0] == "ROLE_ADMIN" %}
+         <strong><i class="material-icons left">verified_user</i>Rango:</strong> Administrador
+        {% endif %}
+        {% if usuario.roles[0] == "ROLE_USER" %}
+         <strong><i class="material-icons left">person</i>Rango:</strong> Usuario
+        {% endif %}
+      </li>
       <li class="collection-item blue lighten-4">
         <a href="{{ path('user_editar_mail') }}" class="waves-effect waves-light btn-small blue lighten-2 white-text">
          <i class="material-icons left">edit</i>Actualizar Mail
         </a>  
-        <a href="{{ path('user_editar_password') }}" class="waves-effect waves-light btn-small blue lighten-2 white-text">
+        <a href="{{ path('user_editar_password') }}" style="margin:5px;" class="waves-effect waves-light btn-small blue lighten-2 white-text">
          <i class="material-icons left">edit</i>Modificar Contraseña
         </a>    
       </li>     
@@ -26,6 +37,19 @@
        
   </div>   
   <!-- Caja de Datos del Usuario -->
+
+  <!-- Si es administrador le doy acceso al panel -->
+  {% if is_granted('ROLE_ADMIN') %}
+  <div class="col s6">
+    <ul class="collection with-header" id="listadoPersonas">
+      <li class="collection-header blue lighten-2 white-text"><h6>Panel de Administracion</h6></li>
+        <a href="{{ path('abm_usuarios') }}" class="collection-item"><strong><i class="material-icons left">assignment_ind</i> ABM de Usuarios del Sistema</strong></a>
+        <a href="#!" class="collection-item"><strong><i class="material-icons left">book</i> ABM de Documentos</strong></a>
+        <a href="#!" class="collection-item"><strong><i class="material-icons left">unarchive</i>ABM de Archivos</strong></a>
+    </ul>
+  </div>
+  {% endif %}
+  <!-- Si es administrador le doy acceso al panel -->
 
    <!-- Botones de Direccionamiento -->
     <div class="offset-s2 col s8 offset-s2">

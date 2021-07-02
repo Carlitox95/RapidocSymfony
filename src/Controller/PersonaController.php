@@ -13,7 +13,7 @@ class PersonaController extends AbstractController {
 
 
     /**
-     * @Route("/registros", name="registros")
+     * @Route("/app/registros", name="registros")
      */
     //Funcion para listar el index del modulo personas
     public function index(): Response {
@@ -33,7 +33,7 @@ class PersonaController extends AbstractController {
     
   
     /**
-     * @Route("/registros/ver/{idPersona}", name="verPersona", methods={"GET"})
+     * @Route("/app/registros/ver/{idPersona}", name="verPersona", methods={"GET"})
      */
     //Funcion para acceder a ver una persona
     public function verPersona($idPersona): Response {
@@ -52,7 +52,7 @@ class PersonaController extends AbstractController {
     
 
     /**
-     * @Route("/registros/nueva", name="nuevaPersona")
+     * @Route("/app/registros/nueva", name="nuevaPersona")
      */
     //Funcion para crear una nueva persona
     public function nuevaPersona(Request $request): Response {
@@ -85,7 +85,7 @@ class PersonaController extends AbstractController {
     }
     
     /**
-     * @Route("/registros/borrar/{idPersona}", name="borrarPersona", methods={"GET"})
+     * @Route("/app/registros/borrar/{idPersona}", name="borrarPersona", methods={"GET","HEAD","POST"})
      */
     //Funcion para borrar los datos de una persona
     public function borrarPersona($idPersona): Response {
@@ -104,13 +104,13 @@ class PersonaController extends AbstractController {
 
 
     /**
-     * @Route("/registros/editar/{idPersona}", name="editarPersona", methods={"GET"})
+     * @Route("/app/registros/editar/{idPersona}", name="editarPersona", methods={"GET","HEAD","POST"})
      */
     //Funcion para editar los datos de una persona
     public function editarPersona($idPersona,Request $request): Response {
      //Obtengo el EntityManager
      $entityManager=$this->getDoctrine()->getManager();
-     //Obtengo el alumno seleccionado
+     //Obtengo la persona seleccionado
      $persona=$entityManager->getRepository(Persona::class)->find($idPersona);   
      //Defino el Formulario
      $form = $this->createForm(PersonaType::class, $persona);

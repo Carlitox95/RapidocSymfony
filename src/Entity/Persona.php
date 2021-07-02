@@ -4,6 +4,8 @@ namespace App\Entity;
 
 use App\Repository\PersonaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=PersonaRepository::class)
@@ -57,7 +59,20 @@ class Persona {
      * @ORM\Column(type="string", length=255)
     */
     private $direccion;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Documento::class, mappedBy="persona")
+     */
+    private $documentos;
+
+    public function __construct()
+    {
+        $this->documentos = new ArrayCollection();
+    }
+
     
+    
+        
    
     public function getId(): ?int
     {
@@ -162,8 +177,40 @@ class Persona {
         return $this;
     }
     
+   
+
     public function __toString() {
         return strtoupper("$this->nombre $this->apellido");
+    }
+
+    /**
+     * @return Collection|Documento[]
+     */
+    public function getDocumentos(): Collection
+    {
+        return $this->documentos;
+    }
+
+    public function addDocumento(Documento $documento): self
+    {
+        if (!$this->documentos->contains($documento)) {
+            $this->documentos[] = $documento;
+            $documento->setPersona($this);
+        }
+
+        return $this;
+    }
+
+    public function removeDocumento(Documento $documento): self
+    {
+        if ($this->documentos->removeElement($documento)) {
+            // set the owning side to null (unless already changed)
+            if ($documento->getPersona() === $this) {
+                $documento->setPersona(null);
+            }
+        }
+
+        return $this;
     }
 
 

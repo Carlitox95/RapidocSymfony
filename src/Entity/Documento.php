@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\PersonaRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 
 /**
  * @ORM\Entity(repositoryClass=DocumentoRepository::class)
@@ -32,10 +33,11 @@ class Documento {
      * @ORM\Column(type="string", length=255)
      */
     private $descripcion;
+    
 
     /**
      * @ORM\Column(type="string", length=255)
-    */
+     */
     private $plantilla;
 
     /**
@@ -43,7 +45,20 @@ class Documento {
     */
     private $codigo;  
 
-       
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Formulario::class, inversedBy="documentos")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $formulario;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Persona::class, inversedBy="documentos")
+     */
+    private $persona;
+
+   
+
    
     public function getId(): ?int
     {
@@ -88,7 +103,7 @@ class Documento {
 
     public function getPlantilla(): ?string
     {
-        return $this->dniNroTramite;
+        return $this->plantilla;
     }
 
     public function setPlantilla(string $plantilla): self
@@ -109,9 +124,34 @@ class Documento {
 
         return $this;
     }
+    
+    
 
+    public function getFormulario(): ?formulario
+    {
+        return $this->formulario;
+    }
 
+    public function setFormulario(?formulario $formulario): self
+    {
+        $this->formulario = $formulario;
 
+        return $this;
+    }
+
+    public function getPersona(): ?persona
+    {
+        return $this->persona;
+    }
+
+    public function setPersona(?persona $persona): self
+    {
+        $this->persona = $persona;
+
+        return $this;
+    }
+
+   
 
 
 }

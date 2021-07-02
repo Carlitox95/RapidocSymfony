@@ -5,9 +5,12 @@ Comandos SYMFONY 5.3
 - Instalar Dependencias: composer install
 - Instalar Web Server: composer require symfony/apache-pack
 - Instalar Paquete de Seguridad: composer require symfony/security-bundle
+- Instalar Paquete de Error: composer require symfony/twig-pack
 - Crear Autentificador de Usuario: php bin/console make:auth
+- Crear Entidades: php bin/console make:entity
 - Iniciar Servidor: symfony server:start
 - Crear Migracion:  php bin/console make:migration
 - Iniciar Migraciones:  php bin/console doctrine:migrations:migrate
 - Actualizar Entidades en BD:  php bin/console doctrine:schema:update --dump-sql
+- Actualizar CSS: php bin/console assets:install
 - Limpiar Cache:  php bin/console cache:clear

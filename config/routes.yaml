@@ -6,21 +6,21 @@ index:
   controller: App\Controller\DefaultController::index
 
 home:
-  path: /home
+  path: /app/
   controller: App\Controller\DefaultController::home
  
 estadisticas:
-  path: /estadisticas
+  path: /app/estadisticas
   controller: App\Controller\DefaultController::home
 
 documentos:
-  path: /documentos
+  path: /app/documentos
   controller: App\Controller\DefaultController::home
 
 archivos:
-  path: /archivos
+  path: /app/archivos
   controller: App\Controller\DefaultController::home
 
 configuracion:
-  path: /configuracion
+  path: /app/configuracion
   controller: App\Controller\DefaultController::home

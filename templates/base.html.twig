@@ -14,6 +14,19 @@
          <link rel="stylesheet" href="{{ asset('css/estilos.css ') }}"> 
         {% endblock %}
         <!-- Estilos Javascript -->
+        <!-- Funciones Javascript -->
+        {% block javascripts %}
+         <script src="{{ asset('js/materialize.min.js') }}"></script>
+         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>   
+         <script type="text/javascript">
+                //Inicializo los Select
+                 document.addEventListener('DOMContentLoaded', function() {
+                 var elems = document.querySelectorAll('select');
+                 var instances = M.FormSelect.init(elems, {});
+                });
+         </script>         
+        {% endblock %}
+        <!-- Funciones Javascript -->
         
     </head>
     <body>
@@ -108,12 +121,7 @@
         {% endblock footer %} 
         <!-- Footer-->
 
-        <!-- Funciones Javascript -->
-        {% block javascripts %}
-         <script src="{{ asset('js/materialize.min.js') }}"></script>
-         <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>            
-        {% endblock %}
-        <!-- Funciones Javascript -->
+      
 
         {% endblock body %}
     </body>

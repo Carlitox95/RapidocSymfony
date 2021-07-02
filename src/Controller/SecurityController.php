@@ -18,7 +18,6 @@ class SecurityController extends AbstractController {
 
     //Funcion para hashear la contraseña
     public function __construct(UserPasswordHasherInterface $passwordHasher) {
-
      $this->passwordHasher = $passwordHasher;
     }
 

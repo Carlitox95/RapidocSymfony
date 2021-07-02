@@ -6,36 +6,50 @@
 <div class="separadorMain">  
 
 
- {# a.addEventListener("click",function(){visualizarPersona(a,personas[idPersona],idPersona)},false); #}
-    <!-- Caja de Registros Personales -->
-    <div class="offset-s2 col s8 offset-s2">
-       
-        <!-- Listado de Personas Cargadas -->                
-        <ul class="collection with-header" id="listadoPersonas">
-             <li class="collection-header blue lighten-2 white-text"><h5>Personas Registradas</h5></li>
- 
-            {% for persona in personas %}
-            	<li class="collection-item">
-            		<div class="row">
-            		 <i class="material-icons left">person</i> {{ persona.apellido}}, {{persona.nombre}}  
-                    <div class="secondary-content">   
-                      <a href="{{ path('borrarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
-                       <i class="material-icons">delete</i> 
-                      </a>
-                      <a href="{{ path('editarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
-                       <i class="material-icons">edit</i> 
-                      </a>
-                      <a href="{{ path('verPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
-                       <i class="material-icons">pageview</i> 
-                      </a>
-                    </div>                 
-            		</div>
-            	</li>     
-            {% endfor %}
+  <!-- Caja  -->
+  <div class="offset-s1 col s10 offset-s1">
+    <center><h4 class="titulo">Personas Registradas</h4></center>
+    <ul class="collection with-header">
+    <table class="striped centered">
+        <thead class="blue lighten-2 white-text">
+          <tr>
+           <th><strong>Apellido</strong></th>
+           <th><strong>Nombre</strong></th>
+           <th><strong>Mail</strong></th>
+           <th><strong>DNI</strong></th>
+           <th><strong>Cuit/Cuil</strong></th>
+           <th><strong>Acciones</strong></th>
+          </tr>
+        </thead>
+        <tbody class="cyan lighten-5">
+          {% for persona in personas %}
+          <tr>
+            <td>{{persona.apellido}}</td>
+            <td>{{persona.nombre}}</td>
+            <td>{{persona.mail}}</td>
+            <td>{{persona.dni}}</td>
+            <td>{{persona.cuitcuil}}</td>
+            <td>              
+              <a style="margin:5px;" title="Eliminar" href="{{ path('borrarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+               <i class="material-icons">delete</i> 
+              </a>
+              <a style="margin:5px;" title="Editar" href="{{ path('editarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+               <i class="material-icons">edit</i> 
+              </a>
+              <a style="margin:5px;" title="Ver"href="{{ path('verPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+               <i class="material-icons">pageview</i> 
+              </a>
+            </td>         
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </ul>
+  </div>   
+  <!-- Caja -->
 
-        </ul> 
-    </div>    
-    <!-- Caja de Registros Personales -->
+
+ 
 
     
     <br>
