@@ -25,8 +25,18 @@
                 </a>
 
                 {% if persona.empleador is null %}
-                <a title="Editar" href="{{ path('nuevoEmpleador') }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
-                 <i class="material-icons left">group_add</i> Añadir Empleador
+                <a title="Editar" href="{{ path('nuevoEmpleador') }}" style="margin:5px;" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">group_add</i> Añadir Nuevo Empleador
+                </a>
+                <a title="Editar" href="{{ path('SeleccionarEmpleador',{'idPersona': persona.id}) }}" style="margin:5px;" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">group_add</i> Seleccionar Empleador
+                </a>
+                {% else %}
+                <a title="Editar" href="{{ path('SeleccionarEmpleador',{'idPersona': persona.id}) }}" style="margin:5px;" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">group_add</i> Seleccionar Empleador
+                </a>
+                <a title="Editar" href="{{ path('DesvincularEmpleador',{'idPersona': persona.id}) }}" style="margin:5px;" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">close</i> Quitar Empleador Asignado
                 </a>
                 {% endif %}
 
@@ -37,7 +47,7 @@
         <!-- Si existe Empleador lo muestro -->
         {% if persona.empleador %}
             <ul class="collection with-header">
-             <li class="collection-header blue lighten-2 white-text"><h6>Empleador: {{persona}}</h6></li>
+             <li class="collection-header blue lighten-2 white-text"><h6>Empleador de {{persona}}</h6></li>
              <li class="collection-item"><strong><i class="material-icons left">person</i> Nombre Completo: </strong> {{ persona.empleador.apellido }},{{ persona.empleador.nombre }}</li>
              <li class="collection-item"><strong><i class="material-icons left">portrait</i> DNI: </strong> {{ persona.empleador.dni }}</li>
              <li class="collection-item"><strong><i class="material-icons left">person</i> Cuit/Cuil: </strong> {{ persona.empleador.cuitcuil }}</li>
@@ -45,10 +55,7 @@
              <li class="collection-item blue lighten-3 white-text">
                 <a title="Editar" href="{{ path('editarEmpleador',{'idEmpleador': persona.empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.empleador.id}}">
                  <i class="material-icons left">edit</i> Editar
-                </a>
-                <a title="Editar" href="{{ path('borrarEmpleador',{'idEmpleador': persona.empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.empleador.id}}">
-                 <i class="material-icons left">delete</i>Eliminar Empleador
-                </a>
+                </a>                
             </li>
             </ul>
         {% endif %}

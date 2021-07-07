@@ -7,6 +7,8 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use App\Form\PersonaType;
 use App\Entity\Persona;
+use App\Form\EmpleadorSeleccionType;
+use App\Entity\Empleador;
 
 
 class PersonaController extends AbstractController {
@@ -137,6 +139,63 @@ class PersonaController extends AbstractController {
          'form' => $form->createView(),
          'persona' => $persona,
         ]);
+    }
+
+     /**
+     * @Route("/app/registro/seleccionarEmpleador/{idPersona}", name="SeleccionarEmpleador", methods={"GET","HEAD","POST"})
+     */
+    //Funcion para seleccionar el empleador de la persona
+    public function SeleccionarEmpleador($idPersona,Request $request): Response {
+     //Obtengo el EntityManager
+     $entityManager=$this->getDoctrine()->getManager();
+     //Obtengo la persona seleccionada
+     $persona=$entityManager->getRepository(Persona::class)->find($idPersona);   
+     //Obtengo todos los empleadores disponibles
+     $empleadores=$entityManager->getRepository(Empleador::class)->findAll();
+     //Defino el Formulario
+     $form = $this->createForm(EmpleadorSeleccionType::class, $persona);
+
+
+     //Si se envia el formulario , existe un request
+     $form->handleRequest($request);
+       
+       //Si se disparo el formulario y es valido
+        if ($form->isSubmitted() && $form->isValid()) {
+         //Obtengo el EntityManager
+         $entityManager = $this->getDoctrine()->getManager();
+         //Obtengo la persona seleccionada
+         $persona=$form->getData();     
+         //Le doy persistencia a la persona
+         $entityManager->persist($persona);
+         //Asiento los cambios en la base de datos
+         $entityManager->flush();
+
+         //Redirecciono al listado de empleadores
+         return $this->redirectToRoute('registros');
+        }
+      
+        return $this->render('Persona/seleccionarEmpleador.html.twig', [
+         'form' => $form->createView(),
+         'persona' => $persona,
+        ]);
+    }
+
+    /**
+     * @Route("/app/registros/DesvincularEmpleador/{idPersona}", name="DesvincularEmpleador", methods={"GET","HEAD","POST"})
+     */
+    //Funcion para borrar los datos de una persona
+    public function DesvincularEmpleador($idPersona): Response {
+     //Obtengo el EntityManager
+     $entityManager=$this->getDoctrine()->getManager();    
+     //Obtengo la persona seleccionada
+     $persona=$entityManager->getRepository(Persona::class)->find($idPersona);     
+     //Quito el empleador de la persona seleccionada
+     $persona->setEmpleador(null);      
+     //Asiento los cambios en la Base de Datos
+     $entityManager->flush();
+          
+     //Redirecciono al listado de alumno
+     return $this->redirectToRoute('registros');     
     }
 
 
