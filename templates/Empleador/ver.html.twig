@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+ 
+
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+   
+    <!-- Caja de Registros Personales -->
+    <div class="offset-s2 col s8 offset-s2">
+        
+        <!-- Muestro datos de la persona -->
+        <ul class="collection with-header">
+         <li class="collection-header blue lighten-2 white-text"><h6>Datos Personales del Empleador {{empleador}}</h6></li>
+         <li class="collection-item"><strong><i class="material-icons left">person</i> Nombre Completo: </strong> {{ empleador.apellido }},{{ empleador.nombre }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">portrait</i> DNI: </strong> {{ empleador.dni }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">person</i> Cuit/Cuil: </strong> {{ empleador.cuitcuil }}</li>
+         <li class="collection-item"><strong><i class="material-icons left">contact_mail</i> Mail: </strong> {{ empleador.mail }}</li>
+            <li class="collection-item blue lighten-3 white-text">
+                <a title="Editar" href="{{ path('editarEmpleador',{'idEmpleador': empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{empleador.id}}">
+                 <i class="material-icons left">edit</i> Editar
+                </a>
+            </li>
+        </ul>
+        <!-- Muestro datos de la persona -->
+
+       
+    </div> 
+    <!-- Caja de Registros Personales -->   
+
+
+    
+    <br>
+    <br>
+    <!-- Botones de Direccionamiento -->
+    <div class="offset-s2 col s8 offset-s2">
+    <center>
+        <a href="{{ path('empleadores') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">arrow_back</i>Volver
+        </a> 
+        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">home</i>Volver al Home
+        </a> 
+    </center>
+    </div>
+    <!-- Botones de Direccionamiento -->
+    
+</div>
+{% endblock contenido %}            
+

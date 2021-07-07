@@ -8,8 +8,9 @@
    
     <!-- Caja de Registros Personales -->
     <div class="offset-s2 col s8 offset-s2">
-
-        <ul class="collection with-header" id="listadoPersonas">
+        
+        <!-- Muestro datos de la persona -->
+        <ul class="collection with-header">
          <li class="collection-header blue lighten-2 white-text"><h6>Datos Personales de {{persona}}</h6></li>
          <li class="collection-item"><strong><i class="material-icons left">person</i> Nombre Completo: </strong> {{ persona.apellido }},{{ persona.nombre }}</li>
          <li class="collection-item"><strong><i class="material-icons left">portrait</i> DNI: </strong> {{ persona.dni }}</li>
@@ -18,7 +19,41 @@
          <li class="collection-item"><strong><i class="material-icons left">contact_mail</i> Mail: </strong> {{ persona.mail }}</li>
          <li class="collection-item"><strong><i class="material-icons left">contact_phone</i> Telefono: </strong> {{ persona.telefono }}</li>
          <li class="collection-item"><strong><i class="material-icons left">home</i> Direccion: </strong> {{ persona.telefono }}</li>
+            <li class="collection-item blue lighten-3 white-text">
+                <a title="Editar" href="{{ path('editarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">edit</i> Editar
+                </a>
+
+                {% if persona.empleador is null %}
+                <a title="Editar" href="{{ path('nuevoEmpleador') }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+                 <i class="material-icons left">group_add</i> Añadir Empleador
+                </a>
+                {% endif %}
+
+            </li>
         </ul>
+        <!-- Muestro datos de la persona -->
+
+        <!-- Si existe Empleador lo muestro -->
+        {% if persona.empleador %}
+            <ul class="collection with-header">
+             <li class="collection-header blue lighten-2 white-text"><h6>Empleador: {{persona}}</h6></li>
+             <li class="collection-item"><strong><i class="material-icons left">person</i> Nombre Completo: </strong> {{ persona.empleador.apellido }},{{ persona.empleador.nombre }}</li>
+             <li class="collection-item"><strong><i class="material-icons left">portrait</i> DNI: </strong> {{ persona.empleador.dni }}</li>
+             <li class="collection-item"><strong><i class="material-icons left">person</i> Cuit/Cuil: </strong> {{ persona.empleador.cuitcuil }}</li>
+             <li class="collection-item"><strong><i class="material-icons left">contact_mail</i> Mail: </strong> {{ persona.empleador.mail }}</li>
+             <li class="collection-item blue lighten-3 white-text">
+                <a title="Editar" href="{{ path('editarEmpleador',{'idEmpleador': persona.empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.empleador.id}}">
+                 <i class="material-icons left">edit</i> Editar
+                </a>
+                <a title="Editar" href="{{ path('borrarEmpleador',{'idEmpleador': persona.empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.empleador.id}}">
+                 <i class="material-icons left">delete</i>Eliminar Empleador
+                </a>
+            </li>
+            </ul>
+        {% endif %}
+        <!-- Si existe Empleador lo muestro -->
+
        
     </div> 
     <!-- Caja de Registros Personales -->   

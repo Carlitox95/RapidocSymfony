@@ -8,7 +8,7 @@
 
   <!-- Caja  -->
   <div class="offset-s1 col s10 offset-s1">
-    <center><h4 class="titulo">Personas Registradas</h4></center>
+    <center><h4 class="titulo">Empleadores Registrados</h4></center>
     <ul class="collection with-header">
     <table class="striped centered">
         <thead class="blue lighten-2 white-text">
@@ -22,21 +22,21 @@
           </tr>
         </thead>
         <tbody class="cyan lighten-5">
-          {% for persona in personas %}
+          {% for empleador in empleadores %}
           <tr>
-            <td>{{persona.apellido}}</td>
-            <td>{{persona.nombre}}</td>
-            <td>{{persona.mail}}</td>
-            <td>{{persona.dni}}</td>
-            <td>{{persona.cuitcuil}}</td>
+            <td>{{empleador.apellido}}</td>
+            <td>{{empleador.nombre}}</td>
+            <td>{{empleador.mail}}</td>
+            <td>{{empleador.dni}}</td>
+            <td>{{empleador.cuitcuil}}</td>
             <td>              
-              <a style="margin:5px;" title="Eliminar" href="{{ path('borrarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+              <a style="margin:5px;" title="Eliminar" href="{{ path('borrarEmpleador',{'idEmpleador': empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{empleador.id}}">
                <i class="material-icons">delete</i> 
               </a>
-              <a style="margin:5px;" title="Editar" href="{{ path('editarPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+              <a style="margin:5px;" title="Editar" href="{{ path('editarEmpleador',{'idEmpleador': empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{empleador.id}}">
                <i class="material-icons">edit</i> 
               </a>
-              <a style="margin:5px;" title="Ver"href="{{ path('verPersona',{'idPersona': persona.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{persona.id}}">
+              <a style="margin:5px;" title="Ver"href="{{ path('verEmpleador',{'idEmpleador': empleador.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{empleador.id}}">
                <i class="material-icons">pageview</i> 
               </a>
             </td>         
@@ -56,11 +56,8 @@
     <!-- Botones de Direccionamiento -->
     <div class="offset-s2 col s8 offset-s2">
     <center>
-        <a href="{{ path('nuevaPersona') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-          <i class="material-icons left">add</i>Registrar Nueva Persona
-        </a>
-        <a href="{{ path('empleadores') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-          <i class="material-icons left">group</i>Listado de Empleadores
+        <a href="{{ path('nuevoEmpleador') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">add</i>Registrar Nuevo Empleador
         </a> 
         <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
           <i class="material-icons left">home</i>Volver al Home

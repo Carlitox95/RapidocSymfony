@@ -65,15 +65,16 @@ class Persona {
      */
     private $documentos;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=Empleador::class, inversedBy="persona")
+     */
+    private $empleador;
+
     public function __construct()
     {
         $this->documentos = new ArrayCollection();
     }
-
-    
-    
-        
-   
+           
     public function getId(): ?int
     {
         return $this->id;
@@ -209,6 +210,18 @@ class Persona {
                 $documento->setPersona(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getEmpleador(): ?Empleador
+    {
+        return $this->empleador;
+    }
+
+    public function setEmpleador(?Empleador $empleador): self
+    {
+        $this->empleador = $empleador;
 
         return $this;
     }

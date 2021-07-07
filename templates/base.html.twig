@@ -20,9 +20,14 @@
          <script src="{{ asset('js/jquery-3.6.0.min.js') }}"></script>   
          <script type="text/javascript">
                 //Inicializo los Select
-                 document.addEventListener('DOMContentLoaded', function() {
+                document.addEventListener('DOMContentLoaded', function() {
                  var elems = document.querySelectorAll('select');
                  var instances = M.FormSelect.init(elems, {});
+                });
+                //Inicializar el sidenav
+                document.addEventListener('DOMContentLoaded', function() {
+                 var elems = document.querySelectorAll('.sidenav');
+                 var instances = M.Sidenav.init(elems,{});
                 });
          </script>         
         {% endblock %}
@@ -79,6 +84,11 @@
                  <li><a href="{{ path('documentos') }}"><i class="material-icons left">edit</i> Documentos</a></li>
                  <li><a href="{{ path('archivos') }}"><i class="material-icons left">folder</i> Archivos</a></li>
                  <li><a href="{{ path('registros') }}"><i class="material-icons left">person</i> Registros</a></li>
+                 {% if app.user %}
+                                <li>
+                                 <a href="{{ path('user') }}"><i class="material-icons left">verified_user</i> {{ app.user.username }}</a>
+                                </li>
+                            {% endif %}
                  <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i> Salir</a></li>
                 </ul>
                 <!-- NAV Mobile -->
