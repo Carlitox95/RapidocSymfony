@@ -69,11 +69,21 @@
                          <div class="alert alert-danger"><center>{{ error.messageKey|trans(error.messageData, 'security') }}</center></div>
                         {% endif %}
 
-                     <label for="inputUsername">Username</label>
-                     <input type="text" value="{{ last_username }}" name="username" id="inputUsername" class="form-control" autocomplete="username" required autofocus>
-                     <label for="inputPassword">Password</label>
-                     <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-                     <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+                        <div class="input-field col s6">
+                         <i class="material-icons prefix">account_circle</i>
+                         <input placeholder="Ingrese nombre de Usuario" type="text" value="{{ last_username }}" name="username" id="inputUsername" class="validate" required>
+                         <label for="inputUsername">Usuario</label>
+                        </div>
+
+                        <div class="input-field col s6">
+                         <i class="material-icons prefix">text_format</i>
+                         <input placeholder="Ingrese su contraseña" type="password" name="password" id="inputPassword" class="validate" autocomplete="current-password" required>
+                         <label for="inputPassword">Contraseña</label>
+                        </div>
+
+                        <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+                     
                         {#
                          Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
                          See https://symfony.com/doc/current/security/remember_me.html
@@ -81,19 +91,19 @@
                         <label><input type="checkbox" name="_remember_me"> Remember me</label></div>
                         #}
                      <br>
-                     <center><button class="btn blue lighten-2 white-text" type="submit">Ingresar</button></center>                     
+                       
+                        <center>
+                            <button style="margin:5px;" class="btn blue lighten-2 white-text" type="submit"><i class="material-icons left">send</i> Ingresar</button>
+                            <a style="margin:5px;" href="{{ path('app_registro') }}" class="waves-effect waves-light btn blue lighten-2 white-text">
+                             <i class="material-icons left">person_add</i>Registrarme
+                            </a> 
+                        </center>                     
                     </form>
                 </li>
                 <!-- Formulario de Ingreso -->
          </div>
 
-        <div class="offset-s2 col s8 offset-s2">
-         <center>
-            <a href="{{ path('app_registro') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-             <i class="material-icons left">add</i>Registrarme
-            </a> 
-         </center>
-        </div>
+      
 
 
         {% endblock contenido %}

@@ -1,6 +1,8 @@
 <!DOCTYPE html>
 <html>
+
     <head>
+    {% block head %} 
         <meta charset="UTF-8">
         <title>
          {% block title %} RapiDoc {% endblock %}
@@ -30,9 +32,10 @@
                  var instances = M.Sidenav.init(elems,{});
                 });
          </script>         
-        {% endblock %}
+        {% endblock javascripts %}
         <!-- Funciones Javascript -->
-        
+    
+     {% endblock head %}
     </head>
     <body>
         {% block body %} 
@@ -59,7 +62,7 @@
                         <ul id="nav" class="right hide-on-med-and-down">
                          <li><a href="{{ path('home') }}"><i class="material-icons left">home</i> Home</a></li>
                          <li><a href="{{ path('estadisticas') }}"><i class="material-icons left">equalizer</i> Estadisticas</a></li>
-                         <li><a href="{{ path('documentos') }}"><i class="material-icons left">edit</i> Documentos</a></li>
+                         <li><a href="{{ path('documento') }}"><i class="material-icons left">edit</i> Documentos</a></li>
                          <li><a href="{{ path('archivos') }}"><i class="material-icons left">folder</i> Archivos</a></li>
                          <li><a href="{{ path('registros') }}"><i class="material-icons left">person</i> Registros</a></li>                        
                         
@@ -81,14 +84,14 @@
                 <ul class="sidenav" id="mobile-demo">
                  <li><a href="{{ path('home') }}"><i class="material-icons left">home</i> Home</a></li>
                  <li><a href="{{ path('estadisticas') }}"><i class="material-icons left">equalizer</i> Estadisticas</a></li>
-                 <li><a href="{{ path('documentos') }}"><i class="material-icons left">edit</i> Documentos</a></li>
+                 <li><a href="{{ path('documento') }}"><i class="material-icons left">edit</i> Documentos</a></li>
                  <li><a href="{{ path('archivos') }}"><i class="material-icons left">folder</i> Archivos</a></li>
                  <li><a href="{{ path('registros') }}"><i class="material-icons left">person</i> Registros</a></li>
-                 {% if app.user %}
-                                <li>
-                                 <a href="{{ path('user') }}"><i class="material-icons left">verified_user</i> {{ app.user.username }}</a>
-                                </li>
-                            {% endif %}
+                    {% if app.user %}
+                        <li>
+                         <a href="{{ path('user') }}"><i class="material-icons left">verified_user</i> {{ app.user.username }}</a>
+                        </li>
+                    {% endif %}
                  <li><a href="{{ path('app_logout') }}"><i class="material-icons left">exit_to_app</i> Salir</a></li>
                 </ul>
                 <!-- NAV Mobile -->

@@ -1,0 +1,58 @@
+{% extends 'base.html.twig' %}
+ 
+
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+
+  <!-- Caja  -->
+  <div class="offset-s1 col s10 offset-s1">
+    <center><h4 class="titulo">Formularios Registrados</h4></center>
+    <ul class="collection with-header">
+    <table class="striped centered">
+        <thead class="blue lighten-2 white-text">
+          <tr>
+           <th><strong>Nombre</strong></th>
+           <th><strong>Categoria</strong></th>
+           <th><strong>Tipo</strong></th>           
+           <th><strong>Acciones</strong></th>
+          </tr>
+        </thead>
+        <tbody class="cyan lighten-5">
+          {% for formulario in formularios %}
+          <tr>
+            <td>{{formulario.nombre}}</td>
+            <td>{{formulario.categoria}}</td>
+            <td>{{formulario.tipo}}</td>            
+            <td>      
+            
+
+            </td>         
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </ul>
+  </div>   
+  <!-- Caja -->
+
+
+ 
+
+    
+    <br>
+    <!-- Botones de Direccionamiento -->
+    <div class="offset-s2 col s8 offset-s2">
+    <center>
+        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">home</i>Volver al Home
+        </a> 
+    </center>
+    </div>
+    <!-- Botones de Direccionamiento -->
+
+    
+</div>
+{% endblock contenido %}            
+

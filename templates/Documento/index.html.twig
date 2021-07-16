@@ -1,0 +1,68 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    <script src="{{ asset('js/DocumentoController.js') }}"></script>      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+  
+  <!-- Columna Izquierda -->
+  <div class="col s8">         
+
+    <!-- Seleccion de Tipo de Documentacion -->    
+      <ul class="collection with-header" id="coleccionDocumentacion">
+        <li class="collection-header blue lighten-2 white-text"><h6>Seleccion del Documento</h6></li>
+        {% for formulario in formularios %}
+         <a href="#!" class="collection-item" id="formulario{{formulario.id}}" nombre="{{formulario.nombre}}" identificador={{formulario.id}} onclick="seleccionarDocumento('{{formulario.id}}');"><strong><i class="material-icons left">unarchive</i>{{formulario.nombre}} </strong></a>
+        {% endfor %}
+      </ul>    
+    <!-- Seleccion de Tipo de Documentacion -->
+   
+  </div>
+  <!-- Columna Izquierda -->
+  
+  <!-- Columna Derecha -->
+  <div class="col s4">
+    <ul class="collection with-header">
+     <li class="collection-header blue lighten-2 white-text"><h6>Vista Previa del Formulario</h6></li>
+     <div id="coleccionImagenes">
+
+      {% for formulario in formularios %}
+        <li class="collection-item oculto" id="vistaPrevia{{formulario.id}}">
+         <img class="responsive" src="{{ absolute_url(asset(formulario.imagen)) }}" height="400px" width="100%"> 
+        </li>
+      {% endfor %}
+      </div>
+    </ul>
+  </div>
+  <!-- Columna Derecha -->
+
+
+ <br>
+  <!-- Formulario y Botones -->
+  <div class="offset-s2 col s8 offset-s2">
+    <form id="formularioDocumento"  action="{{ path('seleccionarPersona') }}" method="POST">     
+      <input id="documentoId" name="documentoId" type="text" class="oculto" readonly>  
+      <center>
+        <button style="margin:5px;" id="botonSubmitDocumento" class="waves-effect waves-light btn-large blue lighten-2 white-text disabled" type="submit" name="action">Confirmar Seleccion
+         <i class="material-icons right">send</i>
+        </button>
+        <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">home</i>Volver al Home
+        </a> 
+      </center>  
+    </form>
+  </div>
+  <!-- Formulario y Botones -->
+    
+</div>
+{% endblock contenido %}            
+

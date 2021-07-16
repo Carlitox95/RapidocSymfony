@@ -173,7 +173,7 @@ class PersonaController extends AbstractController {
          //Redirecciono al listado de empleadores
          return $this->redirectToRoute('registros');
         }
-      
+        
         return $this->render('Persona/seleccionarEmpleador.html.twig', [
          'form' => $form->createView(),
          'persona' => $persona,

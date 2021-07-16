@@ -61,7 +61,7 @@ class Persona {
     private $direccion;
 
     /**
-     * @ORM\OneToMany(targetEntity=Documento::class, mappedBy="persona")
+     * @ORM\OneToMany(targetEntity=Documento::class, mappedBy="persona",cascade={"persist"})
      */
     private $documentos;
 

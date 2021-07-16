@@ -1,0 +1,86 @@
+{% extends 'base.html.twig' %}
+
+
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    <script src="{{ asset('js/DocumentoController.js') }}"></script>      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+ 
+
+    <!-- Mensaje de Seleccion del Documento -->
+    <div class="offset-s1 col s10 offset-s1">
+      <nav>
+        <div class="nav-wrapper blue lighten-2 white-text">
+          <div class="col s12">
+           <a href="{{ path('documento') }}" class="breadcrumb">Documentos</a>
+           <a href="#!" class="breadcrumb">{{formulario.nombre}}</a>
+           <a href="#!" class="breadcrumb">Seleccion de la Persona</a>
+          </div>
+        </div>
+      </nav>
+     <br>
+     <br>
+    </div>
+    <!-- Mensaje de Seleccion del Documento -->
+
+
+    
+
+    <!-- Tabla de Seleccion de la Persona -->
+    <table class="card-panel centered highlight offset-s1 col s10 offset-s1">
+      <thead class="blue lighten-2 white-text">
+        <tr>
+         <th>Nombre Completo</th>
+         <th>DNI</th>
+         <th>Empleador</th>
+         <th>Acciones</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <!-- Imprimo Persona a Persona -->
+        {% for persona in personas %}
+          <tr>
+           <td>{{persona}}</td>
+           <td>{{persona.dni}}</td>
+            <td>
+              {% if persona.empleador %}
+               {{persona.empleador}}, {{persona.empleador.cuitcuil}}
+              {% else %}
+               Sin empleador
+              {% endif %}
+            </td>
+            <td>
+              <form action="{{ path('verificarPersona') }}" method="POST">
+               <input type="hidden" name="personaId" value="{{persona.id}}">
+               <input type="hidden" name="formularioId" value="{{formulario.id}}">
+                <button class="waves-effect waves-light btn-small blue lighten-2 white-text" type="submit" name="action"> 
+                  Seleccionar
+                 <i class="material-icons right">send</i>
+                </button>
+              </form> 
+            </td>
+          </tr>
+        {% endfor %}
+        <!-- Imprimo Persona a Persona -->
+      </tbody>
+    </table>
+    <!-- Tabla de Seleccion de la Persona -->
+
+
+
+  
+ 
+    
+</div>
+{% endblock contenido %}            
+

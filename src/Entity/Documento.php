@@ -3,6 +3,7 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\DocumentoRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 
@@ -34,30 +35,32 @@ class Documento {
      */
     private $descripcion;
     
-
-    /**
-     * @ORM\Column(type="string", length=255)
-     */
-    private $plantilla;
-
-    /**
-     * @ORM\Column(type="string", length=255)
-    */
-    private $codigo;  
-
-
-    /**
-     * @ORM\ManyToOne(targetEntity=Formulario::class, inversedBy="documentos")
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $formulario;
-
+   
     /**
      * @ORM\ManyToOne(targetEntity=Persona::class, inversedBy="documentos")
      */
     private $persona;
 
-   
+  
+    /**
+     * @ORM\Column(type="object")
+     */
+    private $archivo;
+
+    /**
+     * @ORM\ManyToOne(targetEntity=Formulario::class, inversedBy="documentosCreados")
+     */
+    private $formulario;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $ubicacion;
+
+    /**
+     * @ORM\Column(type="date", nullable=true)
+     */
+    private $fechaCreacion;
 
    
     public function getId(): ?int
@@ -126,19 +129,6 @@ class Documento {
     }
     
     
-
-    public function getFormulario(): ?formulario
-    {
-        return $this->formulario;
-    }
-
-    public function setFormulario(?formulario $formulario): self
-    {
-        $this->formulario = $formulario;
-
-        return $this;
-    }
-
     public function getPersona(): ?persona
     {
         return $this->persona;
@@ -151,6 +141,74 @@ class Documento {
         return $this;
     }
 
+
+    public function getArchivo()
+    {
+     return $this->archivo;
+    }
+
+    public function setArchivo($archivo): self
+    {
+     $this->archivo = $archivo;
+     return $this;
+    }
+    
+    public function __toString() {
+        return strtoupper("$this->nombre");
+    }
+
+    public function getFormulario(): ?Formulario
+    {
+        return $this->formulario;
+    }
+
+    public function setFormulario(?Formulario $formulario): self
+    {
+        $this->formulario = $formulario;
+
+        return $this;
+    }
+
+    public function getUbicacion(): ?string
+    {
+        return $this->ubicacion;
+    }
+
+    public function setUbicacion(?string $ubicacion): self
+    {
+        $this->ubicacion = $ubicacion;
+
+        return $this;
+    }
+
+
+    /**
+     * Me devuelve la ubicacion relativa al archivo
+     */
+    function getRuta() {        
+     return "archivos/".$this->getNombre().".pdf";
+    }
+
+    /**
+     * Me retorna el nombre del Archivo sin el Cuit
+     */
+    function getNombreCorto(){
+      return substr($this->getNombre(),12);
+    }
+
+
+
+    public function getFechaCreacion(): ?\DateTimeInterface
+    {
+        return $this->fechaCreacion;
+    }
+
+    public function setFechaCreacion(?\DateTimeInterface $fechaCreacion): self
+    {
+        $this->fechaCreacion = $fechaCreacion;
+
+        return $this;
+    }
    
 
 

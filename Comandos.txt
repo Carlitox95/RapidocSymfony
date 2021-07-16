@@ -1,4 +1,12 @@
 ========================================
+COSAS PENDIENTES
+========================================
+
+1- Relacion entre Archivo y Usuario logueado (1 usuario tiene muchos archivos y 1 archivo es de 1 usuario)
+2- Agregar el dato de fecha de creacion del archivo como atributo del documento
+3- Reparar los pdf creados que no respetan los estilos ni el fondo
+
+========================================
 Comandos SYMFONY 5.3
 ========================================
 
@@ -8,6 +16,8 @@ Comandos SYMFONY 5.3
 - Instalar Paquete de Error: composer require symfony/twig-pack
 - Crear Autentificador de Usuario: php bin/console make:auth
 - Crear Entidades: php bin/console make:entity
+- Crear Controladores: php bin/console make:controller
+- Crear Formulario: php bin/console make:form
 - Iniciar Servidor: symfony server:start
 - Crear Migracion:  php bin/console make:migration
 - Iniciar Migraciones:  php bin/console doctrine:migrations:migrate
@@ -29,6 +39,34 @@ Relacionar entidades via Consola
 8- Ejecutar: php bin/console doctrine:migrations:migrate
 
 ========================================
+CAPTURAS DATOS DE LOS REQUEST
+========================================
+//$form=$request->query->get('form'); OBTENGO SI EL FORM VA POR GET
+     //$form=$request->request->get('form'); OBTENGO SI EL FORM VA POR POST
 
+
+          // Configure Dompdf according to your needs
+          //$pdfOptions = new Options();
+          //$pdfOptions->set('defaultFont', 'Arial');
+          // Instantiate Dompdf with our options
+          //$dompdf = new Dompdf($pdfOptions);
+
+            //Retrieve the HTML generated in our twig file
+            //$html = $this->renderView('bundles/Plantillas/F575B.html.twig', 
+                //[
+                 //'persona' => $persona,
+                 //'boleta' => $boleta,
+                 //'formulario' => $formulario,
+                //]
+            //);
+         
+         // Load HTML to Dompdf
+         //$dompdf->loadHtml($html); 
+         // (Optional) Setup the paper size and orientation 'portrait' or 'portrait'
+         //$dompdf->setPaper('A3', 'portrait');
+         // Render the HTML as PDF
+         //$dompdf->render();
+         // Output the generated PDF to Browser (force download)
+         //$dompdf->stream("mypdf.pdf", [ "Attachment" => false]);
 
 

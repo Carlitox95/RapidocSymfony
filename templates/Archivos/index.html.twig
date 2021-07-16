@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    <script src="{{ asset('js/DocumentoController.js') }}"></script>      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+   
+  <!-- Listado de Personas -->
+    <div class="col s2">
+    	<ul class="collection with-header">
+         <li class="collection-header blue lighten-2 white-text"><h6>Listado de Personas</h6></li>         
+            {% for persona in personas %}
+             <a href="{{ path('archivosPersona',{'idPersona': persona.id}) }}" class="collection-item" id="persona{{persona.id}}" nombre="{{persona.nombre}}"><strong><i class="material-icons left">person</i>{{persona.apellido}},{{persona.nombre}} </strong></a>
+            {% endfor %}        
+        </ul>    	
+    </div>
+    <!-- Listado de Personas -->
+
+
+    <!-- Listado de Archivos Generales -->
+    <div class="col s10">    	
+    	
+        {% if documentos == null %}
+          <blockquote class="textoBlockquote">
+           <br>
+           <p><strong><i class="material-icons left">info</i>Importante:</strong> No se encontraron documentos generados en el sistema!</p>
+           <br>
+          </blockquote>
+        {% else %}
+          <ul class="collection with-header">
+          <table class="highlight">
+            <thead class="blue lighten-2 white-text">
+              <tr>
+               <th>Persona</th>
+               <th>Categoria</th>
+               <th>Nombre</th>
+               <th>Acciones</th>
+              </tr>
+            </thead>
+            <tbody class="light-blue lighten-5">
+              {% for documento in documentos %}
+                <tr>
+                 <td><strong><i class="material-icons left">person</i>{{documento.persona}}</strong></td>
+                 <td><i class="material-icons left">attach_file</i>{{documento.categoria}}</td>
+                 <td><i class="material-icons left">archive</i>{{documento.getNombreCorto()}}.pdf</td>
+                 <td><a href="{{ path('verArchivo',{'idDocumento': documento.id}) }}" class="btn-floating waves-effect waves-light blue lighten-2 white-text"><i class="material-icons">pageview</i></a></td>
+                </tr>
+              {% endfor %}
+            </tbody>
+          </table>
+          </ul>    
+        {% endif %}
+      
+    </div> 
+   <!-- Listado de Archivos Generales -->
+
+
+   <br>
+  <!-- Botones de Direccionamiento -->
+  <div class="offset-s2 col s8 offset-s2">
+    <center> 
+        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+          <i class="material-icons left">home</i>Home
+        </a> 
+    </center>
+  </div>
+  <!-- Botones de Direccionamiento -->
+  
+
+
+</div>
+{% endblock contenido %}            
+

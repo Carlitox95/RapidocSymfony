@@ -77,6 +77,11 @@ main {
  width:30px;
 }
 
+.hojaA3 {
+  min-width:595px;
+  min-height:842px;
+}
+
 .cajaIframe {
  height:80vh;
  width: auto;
@@ -86,6 +91,22 @@ main {
  margin-bottom:10px;
  padding-bottom:5px;
 }
+
+.imagenDocumento{
+ height:150px;
+ width:80%;
+}
+
+.personaDocumento {
+  font-size: 1vw;
+  display: inline-block;
+}
+
+.nombreDocumento {
+  font-size: 1vw;
+  display: inline-block;
+}
+
 
 /* label color */
 .input-field label {

@@ -13,13 +13,13 @@ estadisticas:
   path: /app/estadisticas
   controller: App\Controller\DefaultController::home
 
-documentos:
-  path: /app/documentos
-  controller: App\Controller\DefaultController::home
+#documentos:
+  #path: /app/documentos
+  #controller: App\Controller\DefaultController::home
 
-archivos:
-  path: /app/archivos
-  controller: App\Controller\DefaultController::home
+#archivos:
+  #path: /app/archivos
+  #controller: App\Controller\DefaultController::home
 
 configuracion:
   path: /app/configuracion

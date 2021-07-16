@@ -25,9 +25,19 @@ class Formulario
     private $nombre;
 
     /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $categoria;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
     private $plantilla;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $imagen;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
@@ -39,9 +49,17 @@ class Formulario
      */
     private $documentos;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Documento::class, mappedBy="formulario")
+     */
+    private $documentosCreados;
+
+    
+
     public function __construct()
     {
         $this->documentos = new ArrayCollection();
+        $this->documentosCreados = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -61,6 +79,19 @@ class Formulario
         return $this;
     }
 
+    public function getCategoria(): ?string
+    {
+        return $this->categoria;
+    }
+
+    public function setCategoria(string $categoria): self
+    {
+        $this->categoria = $categoria;
+
+        return $this;
+    }
+
+
     public function getPlantilla(): ?string
     {
         return $this->plantilla;
@@ -69,6 +100,18 @@ class Formulario
     public function setPlantilla(?string $plantilla): self
     {
         $this->plantilla = $plantilla;
+
+        return $this;
+    }
+
+    public function getImagen(): ?string
+    {
+        return $this->imagen;
+    }
+
+    public function setImagen(?string $imagen): self
+    {
+        $this->imagen = $imagen;
 
         return $this;
     }
@@ -88,30 +131,32 @@ class Formulario
     /**
      * @return Collection|Documento[]
      */
-    public function getDocumentos(): Collection
+    public function getDocumentosCreados(): Collection
     {
-        return $this->documentos;
+        return $this->documentosCreados;
     }
 
-    public function addDocumento(Documento $documento): self
+    public function addDocumentosCreado(Documento $documentosCreado): self
     {
-        if (!$this->documentos->contains($documento)) {
-            $this->documentos[] = $documento;
-            $documento->setFormulario($this);
+        if (!$this->documentosCreados->contains($documentosCreado)) {
+            $this->documentosCreados[] = $documentosCreado;
+            $documentosCreado->setFormulario($this);
         }
 
         return $this;
     }
 
-    public function removeDocumento(Documento $documento): self
+    public function removeDocumentosCreado(Documento $documentosCreado): self
     {
-        if ($this->documentos->removeElement($documento)) {
+        if ($this->documentosCreados->removeElement($documentosCreado)) {
             // set the owning side to null (unless already changed)
-            if ($documento->getFormulario() === $this) {
-                $documento->setFormulario(null);
+            if ($documentosCreado->getFormulario() === $this) {
+                $documentosCreado->setFormulario(null);
             }
         }
 
         return $this;
     }
+
+    
 }
