@@ -44,7 +44,7 @@ class ArchivosController extends AbstractController
      $documentos=$personaSeleccionada->getDocumentos();
 
         //Retorno la vista
-        return $this->render('Archivos/directorioPersonal.html.twig', 
+        return $this->render('Archivos/verArchivosPersona.html.twig', 
             [             
              'persona' => $personaSeleccionada,
              'documentos' => $documentos,
@@ -53,13 +53,13 @@ class ArchivosController extends AbstractController
     }
 
     /**
-     * @Route("/app/archivo/{idDocumento}", name="verArchivo", methods={"GET"})
+     * @Route("/app/archivo{idDocumento}", name="verArchivo", methods={"GET"})
      */
     //Funcion para acceder a ver un archivo
     public function verArchivo($idDocumento): Response {
      //Obtengo el Entity Manager
      $em = $this ->getDoctrine()->getManager();
-     //Obtengo la persona
+     //Obtengo el archivo
      $documentoSeleccionado=$em->getRepository(Documento::class)->find($idDocumento);
      
         //Retorno la vista
@@ -69,6 +69,54 @@ class ArchivosController extends AbstractController
             ]
         );
     }
+
+
+    /**
+     * @Route("/app/archivo/eliminar{idDocumento}", name="eliminarArchivo", methods={"GET"})
+     */
+    //Funcion para acceder a ver un archivo
+    public function eliminarArchivo($idDocumento): Response {
+     //Obtengo el Entity Manager
+     $em = $this ->getDoctrine()->getManager();
+     //Obtengo el archivo
+     $documentoSeleccionado=$em->getRepository(Documento::class)->find($idDocumento);
+     //Obtengo la persona
+     $persona= $documentoSeleccionado->getPersona();
+     //Obtengo la ubicacion fisica
+     $archivoFisico=$documentoSeleccionado->getUbicacion();
+     
+
+        //Si se ejecuta normalmente
+        try { 
+         //Elimino el archivo fisicamente antes
+         unlink($archivoFisico); 
+         //Elimino la persona seleccionada
+         $em->remove($documentoSeleccionado);
+         //Asiento los cambios en la Base de Datos
+         $em->flush();
+         
+         //Me traigo los documentos de la persona
+         $documentos=$persona->getDocumentos();
+            
+            //Retorno la vista
+            return $this->render('Archivos/verArchivosPersona.html.twig', 
+                [             
+                 'persona' => $persona,
+                 'documentos' => $documentos,
+                ]
+            );
+        } 
+        //De ocurrir un error lo muestro en el dump
+        catch(Exception $e) { 
+          var_dump($e);
+          die;
+        } 
+
+        
+    }
+
+
+
 
     
 }

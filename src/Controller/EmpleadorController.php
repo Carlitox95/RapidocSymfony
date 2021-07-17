@@ -8,7 +8,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use App\Form\EmpleadorType;
 use App\Form\EmpleadorSeleccionType;
 use App\Entity\Empleador;
-use App\Entity\Persona;
+
 
 
 class EmpleadorController extends AbstractController {
