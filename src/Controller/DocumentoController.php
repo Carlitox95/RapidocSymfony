@@ -21,7 +21,8 @@ use App\Entity\Empleador;
 use App\Entity\Documento;
 use App\Entity\F575B;
 use App\Form\F575BType;
-
+use App\Entity\F575RT;
+use App\Form\F575RTType;
 
 
 class DocumentoController extends AbstractController {
@@ -50,16 +51,16 @@ class DocumentoController extends AbstractController {
     }
 
     /**
-     * @Route("/app/documentos/generar", name="seleccionarPersona", methods={"GET","HEAD","POST"})
+     * @Route("/app/documentos/generar/{idFormulario}", name="seleccionarPersona", methods={"GET","HEAD","POST"})
      */
-    public function SeleccionarPersona(Request $request): Response { 
+    public function SeleccionarPersona($idFormulario,Request $request): Response { 
      //Obtengo el Entity Manager
      $entityManager = $this ->getDoctrine()->getManager(); 
-     //Obtengo los datos que me llegan del formulario
-     $idFormulario= $request->request->get('documentoId');
+     //Obtengo el formulario
+     $formulario=$entityManager->getRepository(Formulario::class)->find($idFormulario);  
        
         //Si falta el parametro vuelvo a la vista
-        if ($idFormulario==NULL) {
+        if (!$formulario) {
          //Redirecciono a la vista principal
          return $this->redirectToRoute('documento');
         }
@@ -132,13 +133,16 @@ class DocumentoController extends AbstractController {
      $persona=$entityManager->getRepository(Persona::class)->find($idPersona);
      //Obtengo el formulario
      $formulario=$entityManager->getRepository(Formulario::class)->find($idFormulario);
+
+
      
         //Dependiendo del tipo de documento, importo el formulario que corresponda
-        if ($formulario->getNombre() =="Formulario F575B") {         
-        
+
+        //Si es el F575B
+        if ($formulario->getId()==1) {         
          //Creo la nueva entidad del formulario 
          $f575b= new F575B();  
-                 
+
          //Le doy datos al formulario
          $f575b->setNombre($persona->getNombre()); 
          $f575b->setApellido($persona->getApellido());   
@@ -162,7 +166,34 @@ class DocumentoController extends AbstractController {
             );
         }
 
+        //Si es el F575RT
+        if ($formulario->getId() == 2) { 
+         //Creo la nueva entidad del formulario 
+         $f575rt= new F575RT();  
+                          
+         //Le doy datos al formulario
+         $f575rt->setNombre($persona->getNombre()); 
+         $f575rt->setApellido($persona->getApellido());   
+         $f575rt->setCuitcuil($persona->getCuitCuil());
 
+            if ($persona->getEmpleador()) {
+             $f575rt->setCuitcuilEmpleador($persona->getEmpleador()->getCuitCuil());
+            }
+               
+         //Defino el form del documento
+         $form= $this->createForm(F575RTType::class, $f575rt); 
+
+    
+            //Retorno la vista
+            return $this->render('Documento/verificarDocumento.html.twig', 
+                [                  
+                 'persona' => $persona,
+                 'form' => $form->createView(),
+                 'formulario' => $formulario,
+                 'documento' => null,
+                ]
+            );
+        }
 
 
 
@@ -182,10 +213,9 @@ class DocumentoController extends AbstractController {
      //Obtengo el id del formulario y el formulario
      $idFormulario=$request->request->get('idFormulario');  
      $formulario=$entityManager->getRepository(Formulario::class)->find($idFormulario);
-
-
-       //Dependiendo del tipo de documento, importo el formulario que corresponda
-        if ($formulario->getNombre() =="Formulario F575B") { 
+         
+        //Si es el Formulario F575B     
+        if ($formulario->getId()==1) {
          //Creo la nueva entidad del formulario 
          $f575b= new F575B(); 
          $form= $this->createForm(F575BType::class, $f575b); 
@@ -207,8 +237,6 @@ class DocumentoController extends AbstractController {
              $documento->setFormulario($formulario);
              $documento->setFechaCreacion(new \DateTime()); 
 
-                  
-
                 //Recopilo los datos necesarios para crear el PDF
                 $boleta = array(
                  "cuitPersona"=>$persona->getCuitcuil(),
@@ -221,8 +249,6 @@ class DocumentoController extends AbstractController {
                  "interesesResarcitorios" =>$formDatos->getInteresesResarcitorios()
                 );
              
-
-
              //Invocamos a la funcion para generar el archivo
              $archivo=$this->generarPDF($boleta,$formulario->getPlantilla());
              //Cargo la direccion del archivo en el documento
@@ -249,6 +275,82 @@ class DocumentoController extends AbstractController {
                 
              $formNuevo= $this->createForm(F575BType::class,$f575bNuevo); 
 
+                //Retorno la vista
+                return $this->render('Documento/verificarDocumento.html.twig', 
+                    [ 
+                     'usuario' => $usuario,            
+                     'formulario' => $formulario,
+                     'form' => $formNuevo->createView(),
+                     'persona' => $persona,             
+                     'documento' => $documento,
+                    ]
+                );
+            }
+        }
+        
+        //Si es el Formulario F575RT
+        if ($formulario->getId()==2) {
+         //Creo la nueva entidad del formulario 
+         $f575rt= new F575RT(); 
+         $form= $this->createForm(F575RTType::class, $f575rt); 
+         $form->handleRequest($request);
+
+            //SI el formulario se envio y es valido
+            if ($form->isSubmitted() && $form->isValid()) {
+
+             //Capturo los datos del formulario
+             $formDatos = $form->getData();
+             
+             //Creo el documento
+             $documento= new Documento();
+             //Le doy atributos al documento, cargando el formulario trabajado y el formulario de creacion
+             $documento->setNombre($persona->getCuitcuil()."_F575RT_".$formDatos->getAnio()."_".$formDatos->getMes());
+             $documento->setCategoria($formulario->getNombre());
+             $documento->setDescripcion($formulario->getNombre());
+             $documento->setArchivo($formDatos); 
+             $documento->setFormulario($formulario);
+             $documento->setFechaCreacion(new \DateTime()); 
+
+                  
+
+                //Recopilo los datos necesarios para crear el PDF
+                $boleta = array(
+                 "cuitPersona"=>$persona->getCuitcuil(),
+                 "cuitEmpleador"=>$formDatos->getCuitcuilEmpleador(),
+                 "mes"=>$formDatos->getMes(),
+                 "anio"=>$formDatos->getAnio(),
+                 "nombreArchivo"=> $documento->getNombre(),
+                 "imagenFondo"=>$formulario->getImagen(),
+                 "diferenciaContribuciones" =>$formDatos->getDiferenciaContribuciones(),
+                 "interesesResarcitorios" =>$formDatos->getInteresesResarcitorios()
+                );
+             
+             //Invocamos a la funcion para generar el archivo
+             $archivo=$this->generarPDF($boleta,$formulario->getPlantilla());
+             //Cargo la direccion del archivo en el documento
+             $documento->setUbicacion($archivo);
+             
+             //Cargo el documento en la persona
+             $persona->addDocumento($documento);
+
+             //Le doy persistencia al objeto
+             $entityManager->persist($persona);
+             //Asiento los cambios en la base de datos
+             $entityManager->flush();
+
+             //Genero el nuevo formulario para volver a crear otro archivo
+             $f575rtNuevo=new F575RT(); 
+             //Le doy datos al formulario
+             $f575rtNuevo->setNombre($persona->getNombre()); 
+             $f575rtNuevo->setApellido($persona->getApellido());   
+             $f575rtNuevo->setCuitcuil($persona->getCuitCuil());
+
+                if ($persona->getEmpleador()) {
+                 $f575rtNuevo->setCuitcuilEmpleador($persona->getEmpleador()->getCuitCuil());
+                }
+                
+             $formNuevo= $this->createForm(F575RTType::class,$f575rtNuevo); 
+
               
               //Retorno la vista
                 return $this->render('Documento/verificarDocumento.html.twig', 
@@ -261,23 +363,10 @@ class DocumentoController extends AbstractController {
                     ]
                 );
             }
-
         }
 
-
-
-     
-    
-        //Retorno la vista con un null en caso de que no haya un documento valido
-        return $this->render('Documento/visualizarDocumento.html.twig', 
-            [ 
-             'usuario' => $usuario,            
-             'formulario' => $formulario,
-             'persona' => $persona,             
-             'documento' => null,
-            ]
-        );
-           
+     //Retorno a la selccion de documentos si no encontre formulario
+     return $this->redirectToRoute('documento');       
     }
 
 
@@ -294,7 +383,7 @@ class DocumentoController extends AbstractController {
      $dompdf = new Dompdf($pdfOptions);
        
      // Retrieve the HTML generated in our twig file
-     $html = $this->renderView('bundles/Plantillas/'.$plantillaHTML, ['boleta' => $boleta]);
+     $html = $this->renderView('Plantillas/'.$plantillaHTML, ['boleta' => $boleta]);
        
      // Load HTML to Dompdf
      $dompdf->loadHtml($html);

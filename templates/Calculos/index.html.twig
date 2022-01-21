@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+  
+  <!-- Contenido a Mostrar -->
+    <div class="offset-s1 col s10 offset-s1">
+      <blockquote class="textoBlockquote">
+       <br>
+       <p><strong><i class="material-icons left">info</i>Importante:</strong> Calculos</p>
+       <br>
+      </blockquote>
+    </div>  
+  <!-- Contenido a Mostrar -->
+  
+  
+  
+  <!-- Botones -->
+  <div class="offset-s2 col s8 offset-s2">
+   <br>
+
+   <center>
+      <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>Volver al Home
+      </a> 
+    </center>  
+  </div>
+  <!-- Botones -->
+    
+</div>
+{% endblock contenido %}            
+

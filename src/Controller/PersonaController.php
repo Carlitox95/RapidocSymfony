@@ -100,7 +100,7 @@ class PersonaController extends AbstractController {
      //Asiento los cambios en la Base de Datos
      $entityManager->flush();
           
-     //Redirecciono al listado de alumno
+     //Redirecciono al listado de personas
      return $this->redirectToRoute('registros');     
     }
 
@@ -122,7 +122,7 @@ class PersonaController extends AbstractController {
        
        //Si se disparo el formulario y es valido
         if ($form->isSubmitted() && $form->isValid()) {
-         //Obtengo el alumno del formulario
+         //Obtengo la persona del formulario
          $persona = $form->getData();
          //Obtengo el EntityManager
          $entityManager = $this->getDoctrine()->getManager();
@@ -194,7 +194,7 @@ class PersonaController extends AbstractController {
      //Asiento los cambios en la Base de Datos
      $entityManager->flush();
           
-     //Redirecciono al listado de alumno
+     //Redirecciono al listado de  personas
      return $this->redirectToRoute('registros');     
     }
 

@@ -5,7 +5,7 @@
   
   {% block javascripts %}
     <!-- Funciones Javascript -->
-    <script src="{{ asset('js/DocumentoController.js') }}"></script>      
+    {#<script src="{{ asset('js/DocumentoController.js') }}"></script>#}      
     <!-- Funciones Javascript -->
   {% endblock javascripts %}
 {% endblock head %}
@@ -13,55 +13,61 @@
 {% block contenido %}
 <div class="separadorMain">  
 
-  
-  <!-- Columna Izquierda -->
-  <div class="col s8">         
+  <!-- Mensaje de Seleccion del Documento -->
+    <div class="offset-s1 col s10 offset-s1">
+      <nav>
+        <div class="nav-wrapper blue lighten-2 white-text">
+          <div class="col s12">
+           <a href="{{ path('documento') }}" class="breadcrumb">Documento</a>
+           <a href="{{ path('documento') }}" class="breadcrumb">Seleccion del Documento</a>
+          </div>
+        </div>
+      </nav>
+     <br>
+     <br>
+    </div>
+    <!-- Mensaje de Seleccion del Documento -->
 
-    <!-- Seleccion de Tipo de Documentacion -->    
-      <ul class="collection with-header" id="coleccionDocumentacion">
-        <li class="collection-header blue lighten-2 white-text"><h6>Seleccion del Documento</h6></li>
-        {% for formulario in formularios %}
-         <a href="#!" class="collection-item" id="formulario{{formulario.id}}" nombre="{{formulario.nombre}}" identificador={{formulario.id}} onclick="seleccionarDocumento('{{formulario.id}}');"><strong><i class="material-icons left">unarchive</i>{{formulario.nombre}} </strong></a>
-        {% endfor %}
-      </ul>    
-    <!-- Seleccion de Tipo de Documentacion -->
-   
-  </div>
-  <!-- Columna Izquierda -->
-  
-  <!-- Columna Derecha -->
-  <div class="col s4">
-    <ul class="collection with-header">
-     <li class="collection-header blue lighten-2 white-text"><h6>Vista Previa del Formulario</h6></li>
-     <div id="coleccionImagenes">
 
-      {% for formulario in formularios %}
-        <li class="collection-item oculto" id="vistaPrevia{{formulario.id}}">
-         <img class="responsive" src="{{ absolute_url(asset(formulario.imagen)) }}" height="400px" width="100%"> 
-        </li>
-      {% endfor %}
+  
+  <!-- Seleccion de la Documentacion -->
+  <div class="offset-s1 col s10 offset-s1">            
+    {% for formulario in formularios %}
+      <div class="col s12 m6">
+        <div class="card blue lighten-2 white-text" id="formulario{{formulario.id}}">
+          <div class="card-content white-text">
+            <span class="card-title tituloTramite">
+             <h6><strong>{{formulario.nombre}}</strong></h6>
+            </span><p>{{formulario.descripcion}}</p>
+          </div>
+          <div class="card-action blue lighten-3 white-text">
+           <i class="material-icons left">person</i><strong>Categoria: </strong>{{formulario.categoria}} 
+           
+            {% if formulario.categoria == "Calculo" %}
+             <a href="{{ path('calculos') }}" class="secondary-content waves-effect waves-light btn btn-small light-blue darken-1">Calcular</a>
+            {% else %}
+             <a href="{{ path('seleccionarPersona',{'idFormulario': formulario.id}) }}" class="secondary-content waves-effect waves-light btn btn-small light-blue darken-1">Seleccionar</a>
+            {% endif %}        
+
+          </div>
+        </div>
       </div>
-    </ul>
+    {% endfor %}       
   </div>
-  <!-- Columna Derecha -->
-
-
- <br>
-  <!-- Formulario y Botones -->
+  <!-- Seleccion de la Documentacion -->
+  
+  
+  <!-- Botones -->
   <div class="offset-s2 col s8 offset-s2">
-    <form id="formularioDocumento"  action="{{ path('seleccionarPersona') }}" method="POST">     
-      <input id="documentoId" name="documentoId" type="text" class="oculto" readonly>  
-      <center>
-        <button style="margin:5px;" id="botonSubmitDocumento" class="waves-effect waves-light btn-large blue lighten-2 white-text disabled" type="submit" name="action">Confirmar Seleccion
-         <i class="material-icons right">send</i>
-        </button>
-        <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-          <i class="material-icons left">home</i>Volver al Home
-        </a> 
-      </center>  
-    </form>
+   <br>
+
+   <center>
+      <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>Volver al Home
+      </a> 
+    </center>  
   </div>
-  <!-- Formulario y Botones -->
+  <!-- Botones -->
     
 </div>
 {% endblock contenido %}            

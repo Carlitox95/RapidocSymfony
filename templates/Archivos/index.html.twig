@@ -14,7 +14,7 @@
 <div class="separadorMain">  
    
   <!-- Listado de Personas -->
-    <div class="col s2">
+    <div class="col s3">
     	<ul class="collection with-header">
          <li class="collection-header blue lighten-2 white-text"><h6>Listado de Personas</h6></li>         
             {% for persona in personas %}
@@ -26,7 +26,7 @@
 
 
     <!-- Listado de Archivos Generales -->
-    <div class="col s10">    	
+    <div class="col s9">    	
     	
         {% if documentos == null %}
           <blockquote class="textoBlockquote">
@@ -42,6 +42,7 @@
                <th>Persona</th>
                <th>Categoria</th>
                <th>Nombre</th>
+               <th>Categoria</th>
                <th>Acciones</th>
               </tr>
             </thead>
@@ -51,6 +52,7 @@
                  <td><strong><i class="material-icons left">person</i>{{documento.persona}}</strong></td>
                  <td><i class="material-icons left">attach_file</i>{{documento.categoria}}</td>
                  <td><i class="material-icons left">archive</i>{{documento.getNombreCorto()}}.pdf</td>
+                 <td><i class="material-icons left">date_range</i>{{documento.fechaCreacion|date("d/m/Y")}}</td>
                  <td><a href="{{ path('verArchivo',{'idDocumento': documento.id}) }}" class="btn-floating waves-effect waves-light blue lighten-2 white-text"><i class="material-icons">pageview</i></a></td>
                 </tr>
               {% endfor %}
@@ -67,9 +69,12 @@
   <!-- Botones de Direccionamiento -->
   <div class="offset-s2 col s8 offset-s2">
     <center> 
-        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-          <i class="material-icons left">home</i>Home
-        </a> 
+      <a href="{{ path('archivos') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">assignment</i>Volver a los Archivos
+      </a> 
+      <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>Home
+      </a> 
     </center>
   </div>
   <!-- Botones de Direccionamiento -->

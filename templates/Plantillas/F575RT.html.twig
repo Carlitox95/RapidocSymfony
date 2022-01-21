@@ -1,0 +1,61 @@
+<html>
+<head>
+ <meta http-equiv='Content-Type' content='text/html; charset=UTF-8'/>
+    <style type="text/css">
+    	.body {
+    	 padding-left:1%;
+    	 padding-top:10%;
+    	 padding-bottom:0px;    	
+ 	  	 position:relative;
+ 	  	 width:100%;
+ 	  	 height:100%;
+ 	  	 background-image: url("{{ absolute_url(asset(boleta.imagenFondo)) }}");
+ 	  	 background-repeat: no-repeat;
+ 	  	}
+    </style>
+ </head>
+<body class="body">
+
+ <!-- CUIT Persona-->
+ <p style='position:absolute;top:120px;left:415px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(0,1) }}</p>
+ <p style='position:absolute;top:120px;left:450px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(1,1) }}</p>
+ <p style='position:absolute;top:120px;left:475px;white-space:nowrap;font-size:20px'>-</p>
+ <p style='position:absolute;top:120px;left:495px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(2,1) }}</p>
+ <p style='position:absolute;top:120px;left:525px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(3,1) }}</p>
+ <p style='position:absolute;top:120px;left:555px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(4,1) }}</p>
+ <p style='position:absolute;top:120px;left:585px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(5,1) }}</p>
+ <p style='position:absolute;top:120px;left:609px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(6,1) }}</p>
+ <p style='position:absolute;top:120px;left:640px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(7,1) }}</p>
+ <p style='position:absolute;top:120px;left:670px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(8,1) }}</p>
+ <p style='position:absolute;top:120px;left:695px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(9,1) }}</p>
+ <p style='position:absolute;top:120px;left:725px;white-space:nowrap;font-size:20px'>-</p>
+ <p style='position:absolute;top:120px;left:750px;white-space:nowrap;font-size:20px'>{{ boleta.cuitPersona |slice(10,1) }}</p>
+ <!-- CUIT Persona -->
+
+ <!-- Fechas -->
+ <p style='position:absolute;top:130px;left:805px;white-space:nowrap;font-size:16px'>{{ boleta.mes | slice(0,1) }}</p>
+ <p style='position:absolute;top:130px;left:825px;white-space:nowrap;font-size:16px'>{{ boleta.mes | slice(1,1) }}</p>
+ <p style='position:absolute;top:130px;left:850px;white-space:nowrap;font-size:16px'>{{ boleta.anio | slice(0,1) }}</p>
+ <p style='position:absolute;top:130px;left:870px;white-space:nowrap;font-size:16px'>{{ boleta.anio | slice(1,1) }}</p>
+ <p style='position:absolute;top:130px;left:890px;white-space:nowrap;font-size:16px'>{{ boleta.anio | slice(2,1) }}</p>
+ <p style='position:absolute;top:130px;left:905px;white-space:nowrap;font-size:16px'>{{ boleta.anio | slice(3,1) }}</p>
+ <!-- Fechas -->
+
+ <!-- Pagos -->
+
+
+ <!-- Pagos -->
+
+ <!-- Datos Empleador -->
+ <p style='position:absolute;top:950px;left:405px;white-space:nowrap;font-size:32px'>CUIT Empleador</p>
+ <p style='position:absolute;top:1000px;left:405px;white-space:nowrap;font-size:32px'>{{ boleta.cuitEmpleador }}</p> 
+ <!-- Datos Empleador -->
+
+</body>
+
+
+</html>
+
+
+
+

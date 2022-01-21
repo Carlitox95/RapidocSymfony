@@ -1,0 +1,88 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    <script src="{{ asset('js/DocumentoController.js') }}"></script>      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+
+  <!-- Mensaje de Seleccion del Documento -->
+  <div class="offset-s1 col s10 offset-s1">
+    <nav>
+      <div class="nav-wrapper blue lighten-2 white-text">
+        <div class="col s12">
+         <a href="{{ path('archivos') }}" class="breadcrumb">Archivos</a>          
+         <a href="#!" class="breadcrumb">Directorio de {{persona.apellido}},{{persona.nombre}}: {{persona.cuitcuil}}</a>
+        </div>
+      </div>
+    </nav>
+    <br>
+    <br>
+  </div>
+  <!-- Mensaje de Seleccion del Documento -->
+   
+  
+  <!-- Listado de Archivos del Directorio Personal -->
+  <div class="offset-s1 col s10 offset-s1">
+    
+      {% if documentos|length == 0 %}
+       <blockquote class="textoBlockquote">
+         <br>
+         <p><strong><i class="material-icons left">info</i>Importante:</strong> No se encontraron documentos generados en el sistema!</p>
+         <br>
+        </blockquote>
+      {% else %}
+        <ul class="collection with-header">
+        <table class="highlight">
+        <thead class="blue lighten-2 white-text">
+          <tr> 
+           <th>Nombre</th>          
+           <th>Categoria</th>
+           <th>Fecha Creacion</th>
+           <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody class="light-blue lighten-5">
+          {% for documento in documentos %}
+            <tr>  
+             <td><i class="material-icons left">archive</i>{{documento.getNombreCorto()}}.pdf</td>           
+             <td><i class="material-icons left">attach_file</i>{{documento.categoria}}</td>
+             <td><i class="material-icons left">date_range</i>{{documento.fechaCreacion|date("d/m/Y")}}</td>
+             <td><a href="{{ path('verArchivo',{'idDocumento': documento.id}) }}" class="btn-floating waves-effect waves-light blue lighten-2 white-text"><i class="material-icons">pageview</i></a></td>
+            </tr>
+          {% endfor %}
+        </tbody>
+        </table>
+        </ul>    
+      {% endif %}     
+    
+  </div> 
+  <!-- Listado de Archivos del Directorio Personal -->
+
+  <br>
+  <!-- Botones de Direccionamiento -->
+  <div class="offset-s2 col s8 offset-s2">
+    <center>
+      <a href="{{ path('archivos') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">assignment</i>Volver a los Archivos
+      </a> 
+      <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>hOME
+      </a> 
+    </center>
+  </div>
+  <!-- Botones de Direccionamiento -->
+  
+
+
+</div>
+{% endblock contenido %}            
+

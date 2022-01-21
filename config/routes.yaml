@@ -9,9 +9,9 @@ home:
   path: /app/
   controller: App\Controller\DefaultController::home
  
-estadisticas:
-  path: /app/estadisticas
-  controller: App\Controller\DefaultController::home
+#estadisticas:
+  #path: /app/estadisticas
+  #controller: App\Controller\DefaultController::home
 
 #documentos:
   #path: /app/documentos
@@ -20,7 +20,3 @@ estadisticas:
 #archivos:
   #path: /app/archivos
   #controller: App\Controller\DefaultController::home
-
-configuracion:
-  path: /app/configuracion
-  controller: App\Controller\DefaultController::home

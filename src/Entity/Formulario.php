@@ -54,6 +54,11 @@ class Formulario
      */
     private $documentosCreados;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $descripcion;
+
     
 
     public function __construct()
@@ -154,6 +159,18 @@ class Formulario
                 $documentosCreado->setFormulario(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getDescripcion(): ?string
+    {
+        return $this->descripcion;
+    }
+
+    public function setDescripcion(?string $descripcion): self
+    {
+        $this->descripcion = $descripcion;
 
         return $this;
     }

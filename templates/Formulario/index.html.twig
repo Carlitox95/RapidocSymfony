@@ -15,6 +15,7 @@
           <tr>
            <th><strong>Nombre</strong></th>
            <th><strong>Categoria</strong></th>
+           <th><strong>Descripcion</strong></th>
            <th><strong>Tipo</strong></th>           
            <th><strong>Acciones</strong></th>
           </tr>
@@ -24,10 +25,15 @@
           <tr>
             <td>{{formulario.nombre}}</td>
             <td>{{formulario.categoria}}</td>
+            <td>{{formulario.descripcion}}</td>
             <td>{{formulario.tipo}}</td>            
-            <td>      
-            
-
+            <td>  
+              <a style="margin:5px;" title="Editar" href="{{ path('editarFormulario',{'idFormulario': formulario.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{formulario.id}}">
+               <i class="material-icons">edit</i> 
+              </a>
+              <a style="margin:5px;" title="Ver"href="{{ path('verFormulario',{'idFormulario': formulario.id}) }}" class="btn-small waves-effect waves-light blue lighten-2 white-text" id="{{formulario.id}}">
+               <i class="material-icons">pageview</i> 
+              </a>            
             </td>         
           </tr>
           {% endfor %}

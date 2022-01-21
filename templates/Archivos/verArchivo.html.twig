@@ -28,12 +28,13 @@
    <br>
    </div>
   <!-- Mensaje de Seleccion del Documento --> 
-   
+  
+
+  
+    
   <!-- Muestro el Archivo -->
-  <div class="offset-s2 col s8 offset-s2">
-    <div class="video-container">
-     <iframe width="100%"  height="1600px" src="{{ asset(documento.getRuta()) }}" frameborder="0" border="0" cellspacing="0" style="border-style: none;"></iframe>  
-    </div>
+  <div class="offset-s2 col s8 offset-s2">         
+   <iframe width="100%"  height="900px" src="{{ asset(documento.getRuta()) }}" frameborder="0" border="0" cellspacing="0" style="border-style: none;"></iframe>  
    <br>
    <br>
   </div>
@@ -45,9 +46,10 @@
   <!-- Botones de Direccionamiento -->
   <div class="offset-s2 col s8 offset-s2">
     <center> 
-        <a href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
-          <i class="material-icons left">home</i>Home
-        </a> 
+      <a href="{{ path('archivos') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">assignment</i>Volver a los Archivos
+      </a> 
+      <a href="{{ path('eliminarArchivo',{'idDocumento': documento.id}) }}" class="waves-effect waves-light btn-large red"><i class="material-icons left">delete</i>Eliminar Archivo</a>
     </center>
   </div>
   <!-- Botones de Direccionamiento -->

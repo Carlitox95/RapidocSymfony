@@ -1,0 +1,74 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    <script src="{{ asset('js/EstadisticasController.js') }}"></script>  
+    <script type="text/javascript">
+      //Capturo los datos
+      const arrayDatos={{ arrayDocumentos|json_encode() |raw }}; 
+      //Capturo la Metrica
+      const metrica="{{metrica}}";
+
+      //Dependiendo de la metrica invoco a la funcion de render
+      if(metrica =="ultimos30Dias") {
+       //Invoco a la funcion de renderizado
+       renderUltimos30Dias(arrayDatos);
+      }      
+    </script>
+          
+
+
+
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+  <!-- Ruta Actual de Estadistica -->
+    <div class="offset-s1 col s10 offset-s1">
+      <nav>
+        <div class="nav-wrapper blue lighten-2 white-text">
+          <div class="col s12">
+           <a href="{{ path('estadisticas') }}" class="breadcrumb">Estadisticas</a>
+           <a href="#" class="breadcrumb">Documentos Generados en los ultimos 30 dias</a>
+          </div>
+        </div>
+      </nav>
+     <br>
+     <br>
+    </div>
+  <!-- Ruta Actual de Estadistica -->
+
+  <!-- Estadisticas -->
+  <div class="offset-s1 col s10 offset-s1"> 
+
+    {% if metrica = "ultimos30Dias" %}
+     <canvas class="fondoCanvas" id="canvasArchivosMensual"></canvas>  
+    {% endif %}
+
+   
+  </div>
+  <!-- Estadisticas -->
+  
+
+
+  
+  <!-- Botones -->
+  <div class="offset-s2 col s8 offset-s2">
+   <br>
+   <center>
+      <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>Volver al Home
+      </a> 
+    </center>  
+  </div>
+  <!-- Botones -->
+    
+</div>
+{% endblock contenido %}            
+

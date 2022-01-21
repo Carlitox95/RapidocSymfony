@@ -1,0 +1,87 @@
+{% extends 'base.html.twig' %}
+ 
+{% block head %} 
+   {{ parent() }}    
+  
+  {% block javascripts %}
+    <!-- Funciones Javascript -->
+    {#<script src="{{ asset('js/DocumentoController.js') }}"></script>#}      
+    <!-- Funciones Javascript -->
+  {% endblock javascripts %}
+{% endblock head %}
+                
+{% block contenido %}
+<div class="separadorMain">  
+
+  <!-- Ruta Actual de Estadistica -->
+    <div class="offset-s1 col s10 offset-s1">
+      <nav>
+        <div class="nav-wrapper blue lighten-2 white-text">
+          <div class="col s12">
+           <a href="{{ path('estadisticas') }}" class="breadcrumb">Estadisticas</a>
+           <a href="#" class="breadcrumb">Seleccion de la Estadistica</a>
+          </div>
+        </div>
+      </nav>
+     <br>
+     <br>
+    </div>
+  <!-- Ruta Actual de Estadistica -->
+
+  <!-- Estadisticas -->
+  <div class="offset-s1 col s10 offset-s1">
+    <ul class="collection with-header">
+      <li class="collection-header blue lighten-2 white-text"><h5>Metricas del Rendimiento de la Aplicacion</h5></li>
+      <li class="collection-item avatar">
+       <i class="material-icons circle green">insert_chart</i>
+       <span class="title">Metricas de Almacenamiento Personal</span>
+       <p>Estadisticas de Uso por Persona</p>
+        <a href="#!" class="secondary-content">
+         <i class="material-icons left">visibility</i>         
+        </a>
+      </li>
+      <li class="collection-item avatar">
+       <i class="material-icons circle green">insert_chart</i>
+       <span class="title">Metrica del Rendimiento durante el Año Actual</span>
+       <p>Documentos generados en el año</p>
+        <a href="#!" class="secondary-content">
+         <i class="material-icons left">visibility</i>         
+        </a>
+      </li>
+      <li class="collection-item avatar">
+       <i class="material-icons circle green">insert_chart</i>
+       <span class="title">Metricas Ocupacion en Disco</span>
+       <p>Espacio en Disco</p>
+        <a href="#!" class="secondary-content">
+         <i class="material-icons left">visibility</i>         
+        </a>
+      </li>
+      <li class="collection-item avatar">
+       <i class="material-icons circle green">insert_chart</i>
+       <span class="title">Metrica del Rendimiento en los Ultimos 30 Dias</span>
+       <p>Documentos generados en el ultimo Mes</p>
+        <a href="{{ path('metricaUltimos30Dias') }}" class="secondary-content">
+         <i class="material-icons left">visibility</i>         
+        </a>
+      </li>
+    </ul>
+  </div>
+  <!-- Estadisticas -->
+  
+
+
+  
+  <!-- Botones -->
+  <div class="offset-s2 col s8 offset-s2">
+   <br>
+   <center>
+      <a style="margin:5px;" href="{{ path('home') }}" class="waves-effect waves-light btn-large blue lighten-2 white-text">
+       <i class="material-icons left">home</i>Volver al Home
+      </a> 
+    </center>  
+  </div>
+  <!-- Botones -->
+    
+</div>
+{% endblock contenido %}            
+
